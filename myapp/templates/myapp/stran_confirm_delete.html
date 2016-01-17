@@ -1,0 +1,29 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="page-header">
+                <h1>Brisanje strani</h1>
+            </div>
+            {% if is_supervisor or avtorupor == user %}
+                <p style="font-size: 20px">
+                    Si prepričan(a), da želiš izbrisati stran: <b>{{ object.naslov }}</b>?
+                </p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Seveda! Izbriši</button>
+                </form>
+            {% else %}
+                <p style="font-size: 30px; color: #c9302c" >
+                    Nimaš pooblastil za izbris strani: <b style="color: black">{{ object.naslov }}</b>!
+                </p>
+                <p style="padding-top: 5%; font-size: 20px; color: black">
+                    Strani lahko brišeš in urejaš le, če so tvoje ali pa če si eden izmed nadzornikov strani.
+                </p>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

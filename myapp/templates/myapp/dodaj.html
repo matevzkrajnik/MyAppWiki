@@ -1,0 +1,43 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="page-header">
+                <h1>Dodajanje strani</h1>
+            </div>
+            <strong>{{ form.non_field_errors }}</strong>
+            <form method="post" action="{% url 'myapp:dodaj_stran' %}">{% csrf_token %}
+                <div class="row" style="padding-bottom: 1%">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <label for="naslov">Naslov: </label>
+                        {{ form.naslov }}
+                    </div>
+                    {% if form.naslov.errors %}
+                        <strong>{{ form.naslov.errors|escape }}</strong>
+                    {% endif %}
+                </div>
+                <div class="row" style="padding-bottom: 1%">
+                    <div class="col-lg-10" style="padding-bottom: 1%">
+                        <label for="vsebina">Vsebina: </label>
+                        {{ form.vsebina }}
+                    </div>
+                    {% if form.vsebina.errors %}
+                        <strong>{{ form.vsebina.errors|escape }}</strong>
+                    {% endif %}
+                    <div class="col-lg-2 col-md-2">
+                        <label for="sporocilo">Sporočilo: </label>
+                        {{ form.sporocilo }}
+                    </div>
+                    {% if form.sporocilo.errors %}
+                        <strong>{{ form.sporocilo.errors|escape }}</strong>
+                    {% endif %}
+                </div>
+                <input type="submit" class="btn btn-primary" value="Shrani stran">
+            </form>
+
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+{% endblock %}

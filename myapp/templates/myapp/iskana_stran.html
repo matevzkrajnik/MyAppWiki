@@ -1,0 +1,41 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="page-header">
+                <h1>{{ naslov }}</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="well">
+                        <p>{{ vsebina|linebreaksbr }}
+                        </p>
+                    </div>
+                    {% if is_supervisor or avtorupor == user %}
+                        <button type="button" style="margin-bottom: 5px" class="btn btn-primary"
+                                onclick="location.href='{% url 'myapp:uredi' id %}'">Uredi stran
+                        </button>
+
+                        <button type="button" style="margin-bottom: 5px" class="pull-right btn btn-danger"
+                                onclick="location.href='{% url 'myapp:izbrisi' id %}'">Izbriši stran
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="col-lg-3 col-md-5 col-sm-5">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input id="ime" type="text" class="form-control" value="{{ avtor }}" disabled>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input id="cas" type="text" class="form-control" value="{{ datum }}" disabled>
+                    </div>
+                    <img class="col-lg-10" style="display: block" src="{{ MEDIA_URL }}{{ avtorslika }}" alt="slika avtorja" >
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

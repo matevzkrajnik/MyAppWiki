@@ -1,0 +1,103 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="page-header">
+            <h1>Splošno
+                <small>{{ user.get_full_name }}</small>
+                {% if is_supervisor %}
+                    <small>(Nadzornik)</small>
+                {% endif %}
+            </h1>
+        </div>
+        <div class="col-lg-1 col-md-0 col-sm-0"></div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-8">
+            <h3>Slika profila</h3>
+            <img src="{{ MEDIA_URL }}{{ user.profil.slika_profila }}" alt="slika za profil"
+                 class="slika-profila col-lg-10 col-md-10 col-sm-10 col-xs-10">
+
+            <div class="form-group input-group">
+                <form action="{% url 'myapp:profil' user.username %}" method="post"
+                      enctype="multipart/form-data">{% csrf_token %}
+                    <!-- <label for="file-upload" class="btn btn-primary col-lg-8 col-md-5"
+                           style="margin-right: 3px; margin-bottom: 3px">
+                        <i class="fa fa-folder-open"></i> Izberi sliko
+                    </label>-->
+                    {{ slika_form.slika_profila }}
+                    <input type="submit" class="btn btn-primary btn-margin-10" name="slika_update" value="Naloži">
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-0 col-sm-0"></div>
+        <form method='post' action="{% url 'myapp:profil' user.username %}"
+              class="col-lg-3 col-md-4 col-sm-4 col-xs-12">{% csrf_token %}
+            <h3>Podatki</h3>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                {{ uporabnik_form.first_name }}
+            </div>
+            {% if uporabnik_form.first_name.errors %}
+                <strong>{{ uporabnik_form.first_name.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                {{ uporabnik_form.last_name }}
+            </div>
+            {% if uporabnik_form.last_name.errors %}
+                <strong>{{ uporabnik_form.last_name.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" value="{{ user.username }}" disabled required>
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                {{ uporabnik_form.email }}
+            </div>
+            {% if uporabnik_form.email.errors %}
+                <strong>{{ uporabnik_form.email.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <input type="submit" class="btn btn-primary" name="profil_update" value="Posodobi podatke">
+            </div>
+        </form>
+
+
+        <form class="col-lg-3 col-md-4 col-sm-4 col-xs-12" method="post"
+              action="{% url 'myapp:password-change' %}">{% csrf_token %}
+            <h3>Posodobitev gesla</h3>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" id="old-password" name="old_password" placeholder="Trenutno geslo" value="" required>
+            </div>
+            {% if form.old_password.errors %}
+                <strong>{{ form.old_password.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="new_password1" placeholder="Novo geslo" required>
+            </div>
+            {% if form.new_password1.errors %}
+                <strong>{{ form.new_password1.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" id="password-confirm" name="new_password2" placeholder="Potrditev gesla" required>
+            </div>
+            {% if form.new_password2.errors %}
+                <strong>{{ form.new_password2.errors|escape }}</strong>
+            {% endif %}
+
+            <div class="form-group input-group">
+                <input type="submit" class="btn btn-primary" name="password-change" value="Posodobi geslo">
+            </div>
+        </form>
+    </div>
+{% endblock %}

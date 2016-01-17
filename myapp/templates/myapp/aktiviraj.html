@@ -1,0 +1,132 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="page-header">
+                <h1>Uporabniki</h1>
+            </div>
+            {% if is_supervisor %}
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-8 col-xs-8">
+                        {% if stProsilcev > 0 %}
+                            <h3>Novi prosilci
+                                <small>Potrdi jih, da bodo lahko pisali strani</small>
+                            </h3>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Uporabniško ime</th>
+                                    <th>Ime</th>
+                                    <th>Priimek</th>
+                                    <th class="pull-right">Potrdi uporabnika</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for prosilec in prosilci %}
+                                    <tr>
+                                        <td>{{ prosilec.username }}</td>
+                                        <td>{{ prosilec.first_name }}</td>
+                                        <td>{{ prosilec.last_name }}</td>
+                                        <td>
+                                            <button type="button" class="pull-right btn btn-xs btn-info"
+                                                    onclick="location.href='{% url 'myapp:potrdi' prosilec.username %}'">
+                                                Postani
+                                                uporabnik
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p style="font-size: 20px">
+                                Ni novih prosilcev.
+                            </p>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-1">
+                        <img class="col-lg-10" style="display: block" src="{% static 'myapp/images/kids.png' %}"
+                             alt="slika prosilcev">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-8 col-xs-8">
+                        {% if stNavadnih > 0 %}
+                            <h3>Navadni uporabniki
+                                <small>Spremeni jih v nadzornike</small>
+                            </h3>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Uporabniško ime</th>
+                                    <th>Ime</th>
+                                    <th>Priimek</th>
+                                    <th class="pull-right">Potrdi nadzornika</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for navadni in navadniUporabniki %}
+                                    <tr>
+                                        <td>{{ navadni.username }}</td>
+                                        <td>{{ navadni.first_name }}</td>
+                                        <td>{{ navadni.last_name }}</td>
+                                        <td>
+                                            <button type="button" class="pull-right btn btn-xs btn-info"
+                                                    onclick="location.href='{% url 'myapp:spremeni_nadzornike' navadni.username %}'">
+                                                Postani nadzornik
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p style="font-size: 20px">
+                                Ni navadnih uporabnikov.
+                            </p>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-8 col-xs-8">
+                        {% if stNavadnih > 0 %}
+                            <h3>Nadzorniki</h3>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Uporabniško ime</th>
+                                    <th>Ime</th>
+                                    <th>Priimek</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for uporabnik in nadzorniki %}
+                                    <tr>
+                                        <td>{{ uporabnik.username }}</td>
+                                        <td>{{ uporabnik.first_name }}</td>
+                                        <td>{{ uporabnik.last_name }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p style="font-size: 20px">
+                                Ni navadnih uporabnikov.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <p style="font-size: 30px; color: #c9302c">
+                    Nimaš pooblastil za pregled uporabnikov!
+                </p>
+                <p style="padding-top: 1%; font-size: 20px; color: black">
+                    Prosi enega izmed nadzornikov, da ti pomaga ;)
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

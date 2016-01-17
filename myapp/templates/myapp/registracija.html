@@ -1,0 +1,79 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="page-header">
+                <h1>Ustvari račun</h1>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1"></div>
+            <strong>{{ form.non_field_errors }}</strong>
+            <form class="col-lg-4 col-md-6 col-sm-5" action="{% url 'myapp:registracija' %}" ,
+                  method="post">{% csrf_token %}
+                <h3>Vnesi podatke</h3>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    {{ form.first_name }}
+                </div>
+                {% if form.first_name.errors %}
+                    <strong>{{ form.first_name.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    {{ form.last_name }}
+                </div>
+                {% if form.last_name.errors %}
+                    <strong>{{ form.last_name.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                    <strong>{{ form.username.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    {{ form.email }}
+                </div>
+                {% if form.email.errors %}
+                    <strong>{{ form.email.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    {{ form.password1 }}
+                </div>
+                {% if form.password1.errors %}
+                    <strong>{{ form.password1.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    {{ form.password2 }}
+                </div>
+                {% if form.password2.errors %}
+                    <strong>{{ form.password2.errors|escape }}</strong>
+                {% endif %}
+
+                <div class="form-group input-group">
+                    <input type="submit" class="btn btn-primary" value="Registriraj se">
+                </div>
+            </form>
+
+            <div class="col-lg-2"></div>
+            <div class="col-lg-5 col-md-4 col-sm-6">
+                <h3>Že imaš račun?</h3>
+                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'myapp:login' %}'">Prijavi
+                    se
+                </button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

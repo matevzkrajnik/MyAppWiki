@@ -1,0 +1,65 @@
+{% extends "myapp/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>MyApp Spletna Storitev</h1>
+    </div>
+    <div class="row" style="padding: 1%">
+        <img class="img-thumbnail col-lg-4 col-xs-12 col-md-5" src="{% static 'myapp/images/grafika.png' %}"
+             alt="grafika MyApp spletna storitev">
+        <div class="col-lg-8 col-xs-12 col-md-7">
+            <div>
+                <h5><b>O storitvi</b></h5>
+
+                <p>Spletna storitev MyApp omogoča uporabnikom, da svojo aplikacijo objavijo na naš portal,
+                    kjer lahko spremljajo
+                    uporabno statistiko:
+                <ul style="list-style-type: circle">
+                    <li>število prenosov (neodvisno od platforme: Android, iOS, Windows Phone),</li>
+                    <li>število obstoječih uporabnikov,</li>
+                    <li>razne lastnosti svojih uporabnikov:
+                        <ul style="list-style-type: square">
+                            <li>pogostost uporabe,</li>
+                            <li>tip naprave,</li>
+                            <li>država,</li>
+                            <li>itd.</li>
+                        </ul>
+                    </li>
+                </ul>
+                S tem pridobijo ogromno, saj spoznajo svoje uporabnike, ugotovijo, kaj je uporabnikom všeč,
+                kaj ne, ...
+                S temi podatki lahko razvijajo aplikacije, ki bodo dosegle večje število uporabnikov in jih
+                bodo uporabniki radi uporabljali.
+            </div>
+        </div>
+    </div>
+    <hr style="border:solid 1px; color: #268090">
+    <div class="row" style="padding: 1%">
+        <img class="col-lg-2 col-xs-6 col-md-5" src="{% static 'myapp/images/moja_slika.jpg' %}" alt="Rajmunda Osterc">
+        <div class="col-lg-6 col-xs-12 col-md-7">
+            <div class="row">
+                <h5><b>O razvijalcu</b></h5>
+
+                <div>
+                    <p>Rajmund Osterc je svojo razvijalsko pot začel že v srednji
+                        šoli, ko se je prvič srečal z računalniškimi programi.
+                        Sprva so ga zanimale igrice, tudi kasneje se je ukvarjal z oblikovanjem in
+                        multimedijo. S porastom mobilnih
+                        naprav pa se je osredotočil za razvijanje v tem segmentu, kamor največ svojega časa
+                        vloži še danes.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <h5><b>Kontakt</b></h5>
+
+                    <p>E-mail: info@myapp.com<br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
